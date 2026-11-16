@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>VRPTW GA Flowcharts</title>
+
+  <!-- Mermaid (runs in-browser, no install) -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+  <style>
+    :root{
+      --bg1:#0b1220;
+      --bg2:#0f1b33;
+      --card: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.10);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+    }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color: var(--text);
+      background: radial-gradient(1200px 700px at 10% 10%, #1b2a52 0%, var(--bg1) 40%, #070b14 100%);
+    }
+    .wrap{
+      max-width: 1100px;
+      margin: 36px auto 60px;
+      padding: 0 18px;
+    }
+    h1{
+      font-size: 26px;
+      margin: 0 0 10px;
+      letter-spacing: .2px;
+    }
+    p{
+      margin: 0 0 22px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .grid{
+      display: grid;
+      gap: 18px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px 18px 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+      overflow-x: auto;
+    }
+    .card h2{
+      margin: 0 0 10px;
+      font-size: 16px;
+      letter-spacing: .3px;
+      color: rgba(255,255,255,0.90);
+    }
+    .hint{
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    /* Make diagrams centered and crisp */
+    .mermaid{
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>VRPTW GA Flowcharts (Vertical + Colorful)</h1>
+    <p>
+      Tip: Open this file in Chrome/Edge. To export: right-click the diagram → “Save image as…”
+      (or print to PDF).
+    </p>
+
+    <div class="grid">
+
+      <div class="card">
+        <h2>Unified GA Framework for VRPTW (Vertical)</h2>
+
+        <pre class="mermaid">
+%%{init: {
+  "theme": "base",
+  "flowchart": { "curve": "basis", "nodeSpacing": 40, "rankSpacing": 60, "padding": 14 },
+  "themeVariables": {
+    "background": "transparent",
+    "primaryColor": "#1f7ae0",
+    "primaryTextColor": "#ffffff",
+    "primaryBorderColor": "#5bb3ff",
+    "lineColor": "#93c5fd",
+    "fontFamily": "ui-sans-serif, system-ui, Segoe UI, Roboto, Arial",
+    "fontSize": "14px"
+  }
+}}%%
+
+flowchart TB
+  A([Start]):::start --> B[Initialize Population<br/>• Random + Greedy Seeds]:::blue
+  B --> C[Chromosome Encoding<br/>• Customer Permutation]:::indigo
+  C --> D[Greedy Feasibility Decoder]:::cyan
+  D --> E[Construct Feasible Routes<br/>• Capacity + Time Window Check]:::green
+  E --> F[Fitness Evaluation<br/>• Total Travel Distance]:::teal
+  F --> G[Tournament Selection]:::violet
+  G --> H[Order Crossover (OX)]:::orange
+  H --> I[Swap Mutation]:::pink
+  I --> J{Termination Reached?}:::diamond
+  J -- "No" --> F
+  J -- "Yes" --> K([Output Best Solution]):::end
+
+  %% Styling
+  classDef start fill:#22c55e,stroke:#86efac,color:#06250f,stroke-width:2px;
+  classDef end fill:#f59e0b,stroke:#fde68a,color:#2a1600,stroke-width:2px;
+  classDef diamond fill:#111827,stroke:#93c5fd,color:#ffffff,stroke-width:2px;
+  classDef blue fill:#1d4ed8,stroke:#60a5fa,color:#fff,stroke-width:2px;
+  classDef indigo fill:#4f46e5,stroke:#a5b4fc,color:#fff,stroke-width:2px;
+  classDef cyan fill:#0891b2,stroke:#67e8f9,color:#fff,stroke-width:2px;
+  classDef green fill:#16a34a,stroke:#86efac,color:#fff,stroke-width:2px;
+  classDef teal fill:#0f766e,stroke:#5eead4,color:#fff,stroke-width:2px;
+  classDef violet fill:#7c3aed,stroke:#c4b5fd,color:#fff,stroke-width:2px;
+  classDef orange fill:#ea580c,stroke:#fdba74,color:#fff,stroke-width:2px;
+  classDef pink fill:#db2777,stroke:#f9a8d4,color:#fff,stroke-width:2px;
+
+  %% Slightly thicker main flow
+  linkStyle 0,1,2,3,4,5,6,7,8,9,10 stroke-width:2.5px;
+        </pre>
+
+        <div class="hint">Vertical layout: <b>TB</b> (top → bottom). Colors can be changed in classDef blocks.</div>
+      </div>
+
+      <div class="card">
+        <h2>Adaptive Hybrid GA with Stagnation-Aware Greedy Injection (Vertical)</h2>
+
+        <pre class="mermaid">
+%%{init: {
+  "theme": "base",
+  "flowchart": { "curve": "basis", "nodeSpacing": 40, "rankSpacing": 70, "padding": 14 },
+  "themeVariables": {
+    "background": "transparent",
+    "primaryColor": "#0ea5e9",
+    "primaryTextColor": "#ffffff",
+    "primaryBorderColor": "#7dd3fc",
+    "lineColor": "#93c5fd",
+    "fontFamily": "ui-sans-serif, system-ui, Segoe UI, Roboto, Arial",
+    "fontSize": "14px"
+  }
+}}%%
+
+flowchart TB
+  L[GA Evolution Loop<br/>• Selection + Crossover + Mutation<br/>• Evaluate + Elitism]:::slate
+  L --> M{Stagnation Detected?}:::diamond
+
+  M -- "No" --> L
+
+  M -- "Yes" --> S1[Generate Greedy Candidate 1<br/>• Ready-Time Sort]:::blue
+  M -- "Yes" --> S2[Generate Greedy Candidate 2<br/>• Demand Sort]:::purple
+  M -- "Yes" --> S3[Generate Greedy Candidate 3<br/>• Distance-to-Depot Sort]:::orange
+
+  S1 --> N[Decode Using Same Greedy Decoder]:::cyan
+  S2 --> N
+  S3 --> N
+
+  N --> O[Evaluate Greedy Candidates<br/>• Feasibility + Distance]:::green
+  O --> P[Select Best Greedy Candidate]:::teal
+  P --> Q{Greedy Better Than<br/>Worst Elite?}:::diamond
+
+  Q -- "Yes" --> R[Replace Worst Elite]:::gold --> L
+  Q -- "No" --> T[Discard Greedy Solution]:::red --> L
+
+  %% Styling
+  classDef diamond fill:#111827,stroke:#93c5fd,color:#ffffff,stroke-width:2px;
+
+  classDef slate fill:#0b1324,stroke:#64748b,color:#e5e7eb,stroke-width:2px;
+
+  classDef blue fill:#1d4ed8,stroke:#60a5fa,color:#fff,stroke-width:2px;
+  classDef purple fill:#7c3aed,stroke:#c4b5fd,color:#fff,stroke-width:2px;
+  classDef orange fill:#ea580c,stroke:#fdba74,color:#fff,stroke-width:2px;
+
+  classDef cyan fill:#0891b2,stroke:#67e8f9,color:#fff,stroke-width:2px;
+  classDef green fill:#16a34a,stroke:#86efac,color:#fff,stroke-width:2px;
+  classDef teal fill:#0f766e,stroke:#5eead4,color:#fff,stroke-width:2px;
+
+  classDef gold fill:#f59e0b,stroke:#fde68a,color:#2a1600,stroke-width:2px;
+  classDef red fill:#dc2626,stroke:#fecaca,color:#fff,stroke-width:2px;
+
+  %% Thicker strokes for important links
+  linkStyle 0,1,2,3,4,5,6,7,8,9,10,11,12,13 stroke-width:2.5px;
+        </pre>
+
+        <div class="hint">This matches your logic: inject greedy <b>only when stagnation is true</b>, then replace worst elite only if better.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+</body>
+</html>
